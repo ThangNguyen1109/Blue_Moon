@@ -22,7 +22,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .form-container input, .form-container button {
+        .form-container input, .form-container button, .form-container select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -60,6 +60,12 @@
 <body>
     <h1>Tạo Khoản Thu</h1>
     <div class="form-container">
+        <select id="householdInfo">
+            <option value="">-- Chọn thông tin hộ dân --</option>
+            <option value="Hộ dân 1">Hộ dân 1</option>
+            <option value="Hộ dân 2">Hộ dân 2</option>
+            <option value="Hộ dân 3">Hộ dân 3</option>
+        </select>
         <input type="text" id="description" placeholder="Mô tả khoản thu">
         <input type="number" id="amount" placeholder="Số tiền (VND)">
         <button onclick="addEntry()">Thêm Khoản Thu</button>
@@ -73,22 +79,24 @@
     <script>
         // Hàm thêm khoản thu vào danh sách
         function addEntry() {
+            const householdInput = document.getElementById('householdInfo');
             const descriptionInput = document.getElementById('description');
             const amountInput = document.getElementById('amount');
             const entryList = document.getElementById('entryList');
 
+            const householdInfo = householdInput.value;
             const description = descriptionInput.value.trim();
             const amount = parseFloat(amountInput.value);
 
-            if (!description || isNaN(amount) || amount <= 0) {
-                alert('Vui lòng nhập mô tả và số tiền hợp lệ!');
+            if (!householdInfo || !description || isNaN(amount) || amount <= 0) {
+                alert('Vui lòng nhập đầy đủ thông tin hợp lệ!');
                 return;
             }
 
             // Tạo một mục mới trong danh sách
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-                <span>${description} - ${amount.toLocaleString('vi-VN')} VND</span>
+                <span>${householdInfo} - ${description} - ${amount.toLocaleString('vi-VN')} VND</span>
                 <button onclick="removeEntry(this)">Xóa</button>
             `;
 
@@ -96,6 +104,7 @@
             entryList.appendChild(listItem);
 
             // Xóa nội dung trong ô nhập sau khi thêm
+            householdInput.value = '';
             descriptionInput.value = '';
             amountInput.value = '';
         }

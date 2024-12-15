@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Khoản Thu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+        .list-container {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .list-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .list-container li {
+            padding: 10px;
+            background-color: #fff;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tạo Khoản Thu</h1>
+    <div class="form-container">
+        <input type="text" id="description" placeholder="Mô tả khoản thu">
+        <input type="number" id="amount" placeholder="Số tiền (VND)">
+        <button onclick="addEntry()">Thêm Khoản Thu</button>
+    </div>
+    <div class="list-container">
+        <h2>Danh Sách Khoản Thu</h2>
+        <ul id="entryList">
+        </ul>
+    </div>
+
+    <script>
+        // Hàm thêm khoản thu vào danh sách
+        function addEntry() {
+            const descriptionInput = document.getElementById('description');
+            const amountInput = document.getElementById('amount');
+            const entryList = document.getElementById('entryList');
+
+            const description = descriptionInput.value.trim();
+            const amount = parseFloat(amountInput.value);
+
+            if (!description || isNaN(amount) || amount <= 0) {
+                alert('Vui lòng nhập mô tả và số tiền hợp lệ!');
+                return;
+            }
+
+            // Tạo một mục mới trong danh sách
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <span>${description} - ${amount.toLocaleString('vi-VN')} VND</span>
+                <button onclick="removeEntry(this)">Xóa</button>
+            `;
+
+            // Thêm mục vào danh sách
+            entryList.appendChild(listItem);
+
+            // Xóa nội dung trong ô nhập sau khi thêm
+            descriptionInput.value = '';
+            amountInput.value = '';
+        }
+
+        // Hàm xóa khoản thu
+        function removeEntry(button) {
+            const listItem = button.parentElement;
+            listItem.remove();
+        }
+    </script>
+</body>
+</html>

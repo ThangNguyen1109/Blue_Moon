@@ -55,19 +55,44 @@
             display: flex;
             justify-content: space-between;
         }
+        .field-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .field-row label {
+            width: 150px; /* Chiều rộng cố định cho label */
+            text-align: right; /* Canh phải label */
+            margin-right: 10px;
+        }
+
+        .field-row input, .field-row select {
+            flex: 1; /* Input sẽ chiếm phần còn lại */
+            padding: 8px;
+        }
     </style>
 </head>
 <body>
     <h1>Tạo Khoản Thu</h1>
     <div class="form-container">
-        <select id="householdInfo">
-            <option value="">-- Chọn thông tin hộ dân --</option>
-            <option value="Hộ dân 1">Hộ dân 1</option>
-            <option value="Hộ dân 2">Hộ dân 2</option>
-            <option value="Hộ dân 3">Hộ dân 3</option>
-        </select>
-        <input type="text" id="description" placeholder="Mô tả khoản thu">
-        <input type="number" id="amount" placeholder="Số tiền (VND)">
+        <div class="field-row">
+            <label for="householdInfo">Hộ dân:</label>
+            <select id="householdInfo">
+                <option value="">-- Chọn thông tin hộ dân --</option>
+                <option value="Hộ dân 1">Hộ dân 1</option>
+                <option value="Hộ dân 2">Hộ dân 2</option>
+                <option value="Hộ dân 3">Hộ dân 3</option>
+            </select>
+        </div>
+        <div class="field-row">
+            <label for="description">Mô tả:</label>
+            <input type="text" id="description" placeholder="Mô tả khoản thu">
+        </div>
+        <div class="field-row">
+            <label for="amount">Số tiền:</label>
+            <input type="number" id="amount" placeholder="Số tiền (VND)">
+        </div>
         <button onclick="addEntry()">Thêm Khoản Thu</button>
     </div>
     <div class="list-container">

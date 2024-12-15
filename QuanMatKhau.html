@@ -69,7 +69,7 @@
         <input type="password" id="password" placeholder="Mật khẩu">
         <button onclick="login()">Đăng Nhập</button>
         <div class="forgot-password">
-            <a href="QuanMatKhau.html">Quên mật khẩu?</a>
+            <a href="#" onclick="showForgotPassword()">Quên mật khẩu?</a>
         </div>
     </div>
 
@@ -87,6 +87,16 @@
                 window.location.href = 'TaoKhoanThu.html';
             } else {
                 alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+            }
+        }
+
+        function showForgotPassword() {
+            const email = prompt('Vui lòng nhập email để đặt lại mật khẩu:');
+
+            if (email) {
+                alert(`Yêu cầu đặt lại mật khẩu đã được gửi đến email: ${email}`);
+            } else {
+                alert('Vui lòng cung cấp email hợp lệ!');
             }
         }
     </script>
